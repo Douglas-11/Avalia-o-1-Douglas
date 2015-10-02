@@ -5,8 +5,10 @@
  */
 package repositorio;
 
+import dados.Cliente;
 import dados.Funcionario;
 import java.util.ArrayList;
+import static repositorio.RepositorioDadosCliente.ListaClientes;
 
 /**
  *
@@ -37,6 +39,11 @@ public class RepositorioDadosFuncionario {
                 break;
             }
         }
+    }
+    public static String excluirFuncionario (Funcionario excluirfuncionario){
+       String mensagem = "\nDeletado com sucesso!";
+       ListaFuncionarios.remove(excluirfuncionario);
+        return mensagem;
     }
     
 }

@@ -5,20 +5,20 @@
  */
 package telas;
 
-import dados.Cliente;
+import dados.Produto;
 import javax.swing.JOptionPane;
-import repositorio.RepositorioDadosCliente;
+import repositorio.RepositorioDadosProduto;
 
 /**
  *
- * @author Thiago Luna
+ * @author Douglas
  */
-public class TelaPesquisarCliente extends javax.swing.JFrame {
+public class TelaPesquisarProduto extends javax.swing.JFrame {
 
     /**
-     * Creates new form TelaPesquisarCliente
+     * Creates new form TelaPesquisarProduto
      */
-    public TelaPesquisarCliente() {
+    public TelaPesquisarProduto() {
         initComponents();
     }
 
@@ -32,17 +32,17 @@ public class TelaPesquisarCliente extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
         campoCodigo = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel1.setFont(new java.awt.Font("Times New Roman", 2, 18)); // NOI18N
-        jLabel1.setText("Pesquisar Cliente");
+        jLabel1.setText("Pesquisar Produto");
 
-        jLabel2.setText("Código:");
+        campoCodigo.setToolTipText("código");
 
         jButton1.setText("Pesquisar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -50,6 +50,8 @@ public class TelaPesquisarCliente extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
+
+        jLabel2.setText("código:");
 
         jButton2.setText("Cancelar");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -65,55 +67,70 @@ public class TelaPesquisarCliente extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(75, 75, 75)
+                        .addComponent(jLabel1))
+                    .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(campoCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jButton1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton2))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(81, 81, 81)
-                        .addComponent(jLabel1)))
-                .addContainerGap(14, Short.MAX_VALUE))
+                        .addComponent(jButton2)))
+                .addContainerGap(16, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(19, 19, 19)
+                .addGap(16, 16, 16)
                 .addComponent(jLabel1)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(campoCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton1)
                     .addComponent(jButton2))
-                .addContainerGap(20, Short.MAX_VALUE))
+                .addGap(25, 25, 25))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+        // realizar a pesquisa pela busca
+        
         String codigo = campoCodigo.getText();
+        
         int cod = Integer.parseInt(codigo);
         
-        Cliente c = RepositorioDadosCliente.pesquisarClientePeloCodigo(cod);
+        Produto produto = RepositorioDadosProduto.pesquisarProdutoPeloCodigo(cod);
         
-        if (c != null){
-            int opcao = JOptionPane.showConfirmDialog(this, c,"Deseja editar esse cliente?",JOptionPane.YES_NO_OPTION);
-            if (opcao == JOptionPane.YES_OPTION){
-                TelaCadastrarCliente tela = new TelaCadastrarCliente(c);
+        if (produto != null) {
+//            JOptionPane.showMessageDialog(this, produto);
+            //JOptionPane.showConfirmDialog(this, produto);
+            int opcao = JOptionPane.showConfirmDialog(this,
+                    produto, 
+                    "Editar o produto?" ,
+                    JOptionPane.YES_NO_OPTION);
+            
+            
+            if (opcao == JOptionPane.YES_OPTION) {
+                System.out.println(" opcao YES ");
+                
+                // chamar a tela de Cadastrar Produto para permitir edicao
+                // passe para a tela o objeto Produto atual
+                TelaCadastrarProduto tela = new TelaCadastrarProduto(produto);
                 tela.setVisible(true);
-            }else if (opcao  == JOptionPane.NO_OPTION){
-                this.dispose();
+                
+            } else if(opcao == JOptionPane.NO_OPTION) {
+                System.out.println(" opcao NO ");
             }
-        }else{
-            JOptionPane.showMessageDialog(this, "Não foi possível encontrar cadastro com esse código!");
-        } 
-        
+            
+        } else {
+            JOptionPane.showMessageDialog(this, "Não encontrei o produto com esse código");
+        }
+      
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -138,20 +155,20 @@ public class TelaPesquisarCliente extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(TelaPesquisarCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaPesquisarProduto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(TelaPesquisarCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaPesquisarProduto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(TelaPesquisarCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaPesquisarProduto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(TelaPesquisarCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaPesquisarProduto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new TelaPesquisarCliente().setVisible(true);
+                new TelaPesquisarProduto().setVisible(true);
             }
         });
     }

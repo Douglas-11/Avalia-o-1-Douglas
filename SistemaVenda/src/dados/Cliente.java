@@ -16,14 +16,14 @@ public class Cliente {
     String rua;
     String bairro;
     String cpf;
-    int numero;
+    String numero;
     String telefone;
 
     
     
     private static int codigoContador = 1;
 
-    public Cliente(String nome, String rua, String bairro, String cpf, String telefone) {
+    public Cliente(String nome, String bairro, String rua, String cpf, String numero, String telefone) {
         this.nome = nome;
         this.bairro = bairro;
         this.rua = rua;
@@ -77,11 +77,11 @@ public class Cliente {
         this.cpf = cpf;
     }
 
-    public int getNumero() {
+    public String getNumero() {
         return numero;
     }
 
-    public void setNumero(int numero) {
+    public void setNumero(String numero) {
         this.numero = numero;
     }
 

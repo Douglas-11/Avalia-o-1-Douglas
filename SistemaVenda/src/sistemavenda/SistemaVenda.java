@@ -5,21 +5,21 @@
  */
 package sistemavenda;
 
-import dados.Funcionario;
+import dados.Cliente;
 import java.util.ArrayList;
-import telas.TelaPrincipalFuncionario;
+import telas.TelaPrincipal;
 
 /**
  *
  * @author Thiago Luna
  */
-public class SistemaFuncionario {
+public class SistemaVenda {
     
-    public static ArrayList<Funcionario> ListaFuncionarios = new ArrayList<>();
+     public static ArrayList<Cliente> ListaClientes = new ArrayList<>();
     
     public static void main(String[] args) {
      
-        TelaPrincipalFuncionario tela = new TelaPrincipalFuncionario();
+        TelaPrincipal tela = new TelaPrincipal();
         tela.setVisible(true);
         
     }

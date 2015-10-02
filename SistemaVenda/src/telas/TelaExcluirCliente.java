@@ -8,17 +8,18 @@ package telas;
 import dados.Cliente;
 import javax.swing.JOptionPane;
 import repositorio.RepositorioDadosCliente;
+import sistemavenda.SistemaVenda;
 
 /**
  *
  * @author Thiago Luna
  */
-public class TelaPesquisarCliente extends javax.swing.JFrame {
+public class TelaExcluirCliente extends javax.swing.JFrame {
 
     /**
-     * Creates new form TelaPesquisarCliente
+     * Creates new form TelaExcluirCliente
      */
-    public TelaPesquisarCliente() {
+    public TelaExcluirCliente() {
         initComponents();
     }
 
@@ -39,12 +40,11 @@ public class TelaPesquisarCliente extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setFont(new java.awt.Font("Times New Roman", 2, 18)); // NOI18N
-        jLabel1.setText("Pesquisar Cliente");
+        jLabel1.setText("Código:");
 
-        jLabel2.setText("Código:");
+        jLabel2.setText("Excluir Cliente");
 
-        jButton1.setText("Pesquisar");
+        jButton1.setText("Excluir");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -63,33 +63,31 @@ public class TelaPesquisarCliente extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGap(20, 20, 20)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel2)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel2)
+                        .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(campoCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton1)
+                        .addComponent(campoCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton2))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(81, 81, 81)
-                        .addComponent(jLabel1)))
-                .addContainerGap(14, Short.MAX_VALUE))
+                        .addComponent(jButton1)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton2)
+                .addContainerGap(35, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(19, 19, 19)
-                .addComponent(jLabel1)
+                .addGap(16, 16, 16)
+                .addComponent(jLabel2)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
+                    .addComponent(jLabel1)
                     .addComponent(campoCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton1)
                     .addComponent(jButton2))
-                .addContainerGap(20, Short.MAX_VALUE))
+                .addContainerGap(24, Short.MAX_VALUE))
         );
 
         pack();
@@ -97,23 +95,22 @@ public class TelaPesquisarCliente extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        String codigo = campoCodigo.getText();
-        int cod = Integer.parseInt(codigo);
+        String deletar = campoCodigo.getText();
+        int excluirCliente = Integer.parseInt(deletar);
         
-        Cliente c = RepositorioDadosCliente.pesquisarClientePeloCodigo(cod);
+        Cliente cliente = RepositorioDadosCliente.pesquisarClientePeloCodigo(excluirCliente);
         
-        if (c != null){
-            int opcao = JOptionPane.showConfirmDialog(this, c,"Deseja editar esse cliente?",JOptionPane.YES_NO_OPTION);
+        if (cliente != null){
+            int opcao = JOptionPane.showConfirmDialog(this, cliente,"Deseja excluir esse cliente?",JOptionPane.YES_NO_OPTION);
             if (opcao == JOptionPane.YES_OPTION){
-                TelaCadastrarCliente tela = new TelaCadastrarCliente(c);
-                tela.setVisible(true);
+                RepositorioDadosCliente.excluirCliente(cliente);
+                this.dispose();
             }else if (opcao  == JOptionPane.NO_OPTION){
                 this.dispose();
             }
         }else{
             JOptionPane.showMessageDialog(this, "Não foi possível encontrar cadastro com esse código!");
-        } 
-        
+        }          
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -138,20 +135,20 @@ public class TelaPesquisarCliente extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(TelaPesquisarCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaExcluirCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(TelaPesquisarCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaExcluirCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(TelaPesquisarCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaExcluirCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(TelaPesquisarCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaExcluirCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new TelaPesquisarCliente().setVisible(true);
+                new TelaExcluirCliente().setVisible(true);
             }
         });
     }
