@@ -4,8 +4,8 @@
  * and open the template in the editor.
  */
 package repositorio;
+
 import dados.Cliente;
-import dados.Produto;
 import java.util.ArrayList;
 
 /**
@@ -39,8 +39,8 @@ public class RepositorioDadosCliente {
         }
     }
     public static String excluirCliente (Cliente excluircliente){
-       String mensagem = "\nDeletado com sucesso!";
        ListaClientes.remove(excluircliente);
-        return mensagem;
+       String e = "\nDeletado com sucesso!";
+        return e;
     }
 }

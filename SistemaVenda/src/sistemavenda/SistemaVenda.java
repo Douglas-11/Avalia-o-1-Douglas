@@ -15,7 +15,7 @@ import telas.TelaPrincipal;
  */
 public class SistemaVenda {
     
-     public static ArrayList<Cliente> ListaClientes = new ArrayList<>();
+    public static ArrayList<Cliente> ListaClientes = new ArrayList<>();
     
     public static void main(String[] args) {
      

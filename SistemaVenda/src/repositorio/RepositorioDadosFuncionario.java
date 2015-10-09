@@ -5,10 +5,8 @@
  */
 package repositorio;
 
-import dados.Cliente;
 import dados.Funcionario;
 import java.util.ArrayList;
-import static repositorio.RepositorioDadosCliente.ListaClientes;
 
 /**
  *

@@ -5,10 +5,8 @@
  */
 package repositorio;
 
-import dados.Funcionario;
 import dados.Produto;
 import java.util.ArrayList;
-import static repositorio.RepositorioDadosFuncionario.ListaFuncionarios;
 
 /**
  * Essa classe é responsável por gerenciar os dados do sistema.

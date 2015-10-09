@@ -8,7 +8,6 @@ package telas;
 import dados.Cliente;
 import javax.swing.JOptionPane;
 import repositorio.RepositorioDadosCliente;
-import sistemavenda.SistemaVenda;
 
 /**
  *
